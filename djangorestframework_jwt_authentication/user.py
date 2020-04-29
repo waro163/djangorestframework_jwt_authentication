@@ -24,7 +24,7 @@ class RemoteUser(object):
     def authenticate(self, request, **kwargs):
         remote_user_msg = kwargs.get('remote_user')
         if remote_user_msg:
-            for key, value in remote_user_msg:
+            for key, value in remote_user_msg.items():
                 setattr(self, key, value)
             return self
         return None
