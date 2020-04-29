@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'g93ps)oi8%pffori3&908$cv_=(_(^l)=a-^ea993+s_le@b97'
-
+JWT_SECRET = os.environ.get("JWT_SECRET", 'b7y*ef&2a8j_ki&ms*c_o#!zp$!bgk8c=2f%^q@9y16zntsp=2')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
+    'django_jwt_middleware.middleware.jwt_middleware.JWTMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -103,6 +105,36 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     # 'rest_framework.permissions.IsAuthenticated',
+    # ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        #  'djangorestframework_jwt_authentication.authentication.JwtAuthentication',
+         'rest_framework.authentication.SessionAuthentication',
+         'djangorestframework_jwt_authentication.authentication.JwtAuthentication',
+    ),
+    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
+    'DEFAULT_FILTER_BACKENDS': [
+        # 'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'NON_FIELD_ERRORS_KEY': "non_field_errors",
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
