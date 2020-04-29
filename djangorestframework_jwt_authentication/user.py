@@ -10,6 +10,6 @@ class BaseUser:
 class User(BaseUser):
     def __init__(self,payload):
         if not isinstance(payload,dict):
-            raise 
-        for key in payload:
-            setattr(self,key,payload.get(key))
+            raise
+        for key, value in payload.items():
+            setattr(self, key, value)
