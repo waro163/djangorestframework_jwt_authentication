@@ -123,9 +123,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        #  'djangorestframework_jwt_authentication.authentication.JwtAuthentication',
-         'rest_framework.authentication.SessionAuthentication',
-         'djangorestframework_jwt_authentication.authentication.JwtAuthentication',
+        'djangorestframework_jwt_authentication.authentication.JwtAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
     'DEFAULT_FILTER_BACKENDS': [
