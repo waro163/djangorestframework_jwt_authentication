@@ -22,9 +22,12 @@ class RemoteUser(object):
         return True
 
     def authenticate(self, request, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-        return self
+        remote_user_msg = kwargs.get('remote_user')
+        if remote_user_msg:
+            for key, value in remote_user_msg:
+                setattr(self, key, value)
+            return self
+        return None
 
     # This property is for drf check permission
     @property
