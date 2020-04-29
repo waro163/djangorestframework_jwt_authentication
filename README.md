@@ -1,3 +1,5 @@
+Before you user this module, you must install [django_jwt_middleware](https://github.com/waro163/django_jwt_middleware.git)
+
 # JwtUser
 if you use JwtAuthentication in drf,
 you must configure following configuration in the settings.py
@@ -15,7 +17,7 @@ REST_FRAMEWORK = {
 }
 
 # RemoteUser
-if you use RemoteUserAuthentication in def,
+if you use RemoteUserAuthentication in drf,
 you must configure following configuration in the settings.py
 
 AUTHENTICATION_BACKENDS = [
