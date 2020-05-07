@@ -1,7 +1,11 @@
 
 class BaseUser:
-    def __init__(self,user_id):
-        self.id = user_id
+    def __init__(self,**kwargs):
+        user_id = getattr(self,'id',None) or kwargs.get('id')
+        if user_id:
+            self.id = self.pk = user_id
+        else:
+            raise Exception("please package user id in jwt authorization token, format is {id:'xxxx'}")
 
     @property
     def is_authenticated(self):
@@ -13,6 +17,7 @@ class User(BaseUser):
             raise
         for key, value in payload.items():
             setattr(self, key, value)
+        super().__init__()
 
 class RemoteUser(object):
 
