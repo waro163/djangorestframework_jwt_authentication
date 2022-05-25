@@ -20,7 +20,7 @@ setup(
         'asgiref==3.2.7',
         'Django>=3.0.5',
         'djangorestframework>=3.11.0',
-        'PyJWT==1.7.1',
+        'PyJWT==2.4.0',
         'pytz==2019.3',
         'sqlparse==0.3.1',
     ],
